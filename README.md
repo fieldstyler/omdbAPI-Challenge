@@ -4,11 +4,15 @@ It is time to run some tests against OMDb API - The Open Movie Database!
 
 # Getting Started
 Clone this repository
+
 `cd omdbAPI-Challenge`
 
 To make sure you can successfully run tests against the OMDb API, run the following commands in your terminal...
+
 `npm install`
+
 `npm install jest`
+
 `npm install node-fetch`
 
 To run your tests, run `npm test` in your terminal and you're good to go!
@@ -21,10 +25,12 @@ To run your tests, run `npm test` in your terminal and you're good to go!
 
 3. Extend omdbapi.spec.js by creating a test that performs a search on 'thomas'.
 
-  `- Verify all titles are a relevant match
+  ```
+  - Verify all titles are a relevant match
   - Verify keys include Title, Year, imdbID, Type, and Poster for all records in the response
   - Verify values are all of the correct object class
-  - Verify year matches correct format`
+  - Verify year matches correct format
+  ```
 
 4. Test that uses the i parameter to verify each title on page 1 is accessible via imdbID
 

@@ -2,6 +2,11 @@
 
 It is time to run some tests against OMDb API - The Open Movie Database!
 
+npm install
+npm install jest
+npm install node-fetch
+npm test 
+
 ## Tips:
 
 - You can find the main api page at http://www.omdbapi.com

@@ -1,6 +1,20 @@
 const fetch = require('node-fetch');
 
+
 describe("omdbAPI", () => {
+  let badResponse;
+  beforeAll(async() => {
+    badResponse = await fetch("http://www.omdbapi.com?apikey=", {method: 'GET'})
+    .then((data) => {
+    return data.json()
+    })
+  })
+  describe("no api key", () => {
+    it("returns false and with an error message if no apikey is given", () => {
+        expect(badResponse["Response"]).toBe("False")
+        expect(badResponse["Error"]).toBe("No API key provided.")
+    })
+  })
   let response;
   beforeAll(async() => {
     response = await fetch("http://www.omdbapi.com?apikey=63856c6&s=thomas", {method: 'GET'})

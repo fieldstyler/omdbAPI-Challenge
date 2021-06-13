@@ -28,5 +28,17 @@ describe("omdbAPI", () => {
         })
       })
     })
+    it("verify year matches", () => {
+      response.Search.forEach((movie) => {
+        if (movie.Type === "movie") {
+          expect(movie.Year).toMatch(/[0-9]{4}/)
+        }
+        else {
+          movie.Year.split('-').forEach((year) => {
+            expect(year).toMatch(/[0-9]{4}/)
+          })
+        }
+      })
+    })
   })
 })

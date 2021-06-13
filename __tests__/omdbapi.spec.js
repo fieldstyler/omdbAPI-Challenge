@@ -41,4 +41,18 @@ describe("omdbAPI", () => {
       })
     })
   })
+  describe("imdbID access", () => {
+    it("can get data through imdb value", async() => {
+      const imdbIDs = response.Search.map((movie) => {
+        return [movie.Title, movie.imdbID]
+      })
+      imdbIDs.forEach(async([title, id]) => {
+        let idResponse = await fetch(`http://www.omdbapi.com?apikey=63856c6&i=${id}`, {method: 'GET'})
+        .then((data) => {
+        return data.json()
+        })
+        expect(idResponse.Title).toBe(title)
+      })
+    })
+  })
 })

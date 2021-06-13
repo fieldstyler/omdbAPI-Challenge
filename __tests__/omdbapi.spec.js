@@ -65,4 +65,41 @@ describe("omdbAPI", () => {
       })
     })
   })
+  describe("no duplicate records", () => {
+    let response2, response3, response4, response5;
+    beforeAll(async() => {
+      response2 = await fetch("http://www.omdbapi.com?apikey=63856c6&s=thomas&page=2", {method: 'GET'})
+      .then((data) => {
+        return data.json()
+      })
+      response3 = await fetch("http://www.omdbapi.com?apikey=63856c6&s=thomas&page=3", {method: 'GET'})
+      .then((data) => {
+        return data.json()
+      })
+      response4 = await fetch("http://www.omdbapi.com?apikey=63856c6&s=thomas&page=4", {method: 'GET'})
+      .then((data) => {
+        return data.json()
+      })
+      response5 = await fetch("http://www.omdbapi.com?apikey=63856c6&s=thomas&page=5", {method: 'GET'})
+      .then((data) => data.json())
+    })
+    it("no duplicates on first five pages", () => {
+      let responseArray = [response, response2, response3, response4, response5]
+      responseArray.forEach((resp, i) => {
+        responseArray[i] = resp.Search.map((movie) => {
+          return movie.imdbID
+        })
+      })
+      responseArray = responseArray.flat()
+      responseArray.forEach((movieID) => {
+        expect(isUnique(responseArray, movieID)).toBe(true)
+      })
+    })
+  })
 })
+// helper function
+function isUnique(array, entry) {
+  let first = array.indexOf(entry)
+  let last = array.lastIndexOf(entry)
+  return first == last
+}

@@ -21,5 +21,12 @@ describe("omdbAPI", () => {
         expect(alphabetizedProperties).toStrictEqual(["imdbID", "Poster", "Title", "Type", "Year"])
       });
     })
+    it("verify values are of correct object class", () => {
+      response.Search.forEach((movie) => {
+        Object.values(movie).forEach((value) => {
+          expect(typeof value).toEqual("string")
+        })
+      })
+    })
   })
 })

@@ -96,6 +96,28 @@ describe("omdbAPI", () => {
       })
     })
   })
+  describe("movies with my last name in the title and released on my birth year", () => {
+    let nameAndYearResponse;
+    const lastName = "fields"
+    const birthYear = "1993"
+    const movie = "movie"
+    beforeAll(async() => {
+      nameAndYearResponse = await fetch(`http://www.omdbapi.com?apikey=63856c6&s=${lastName}&y=${birthYear}&type=${movie}`, {method: 'GET'})
+      .then((data) => {
+      return data.json()
+      })
+    })
+    it("returns all relevant movies", () => {
+      var count = 0
+      nameAndYearResponse.Search.forEach((movie) => {
+        count += 1
+        expect(movie.Title.toLowerCase()).toContain("fields")
+        expect(movie.Year).toContain("1993")
+        expect(movie.Type.toLowerCase()).toContain("movie")
+      });
+      expect(count).toBe(1)
+    })
+  })
 })
 // helper function
 function isUnique(array, entry) {

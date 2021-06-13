@@ -3,7 +3,7 @@
 It is time to run some tests against OMDb API - The Open Movie Database!
 
 # Getting Started
-Clone this repository
+Clone this repository --> `git clone git@github.com:fieldstyler/omdbAPI-Challenge.git`
 
 `cd omdbAPI-Challenge`
 

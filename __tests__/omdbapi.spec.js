@@ -2,7 +2,6 @@ const fetch = require('node-fetch');
 
 describe("omdbAPI", () => {
   let response;
-  // beforeAll so that we only run fetch once
   beforeAll(async() => {
     response = await fetch("http://www.omdbapi.com?apikey=63856c6&s=thomas", {method: 'GET'})
     .then((data) => {
@@ -52,6 +51,17 @@ describe("omdbAPI", () => {
         return data.json()
         })
         expect(idResponse.Title).toBe(title)
+      })
+    })
+  })
+  describe("poster links unbroken", () => {
+    it("shouldn't be broken", async() => {
+      const posterURLs = response.Search.map((movie) => {
+        return movie.Poster
+      })
+      posterURLs.forEach(async(poster) => {
+        let posterResponse = await fetch(poster, {method: 'GET'})
+        expect(posterResponse.ok).toBe(true)
       })
     })
   })

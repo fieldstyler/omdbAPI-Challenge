@@ -10,10 +10,15 @@ describe("omdbAPI", () => {
     })
   })
   describe("simple response validation", () => {
-    // fetch returns promise, have to wait for promise to return response data
     it("verifies titles are a relevant match", () => {
       response.Search.forEach((movie) => {
         expect(movie.Title.toLowerCase()).toContain("thomas")
+      });
+    })
+    it("verify movie properties", () => {
+      response.Search.forEach((movie) => {
+        const alphabetizedProperties = Object.keys(movie).sort((a, b) => a.localeCompare(b))
+        expect(alphabetizedProperties).toStrictEqual(["imdbID", "Poster", "Title", "Type", "Year"])
       });
     })
   })
